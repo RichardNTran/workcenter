@@ -3,12 +3,13 @@ import homePanelBackground from '../../assets/images/home/home-panel-background.
 
 export const IntroducePanel = styled.div`
   position: relative;
+  margin-top: -55px;
+  width: 100%;
+  height: 100vh;
   background-image: url(${homePanelBackground});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  width: 100%;
-  height: calc(100vh - 55px);
 `;
 
 export const IntroducePanelOverview = styled.div`
