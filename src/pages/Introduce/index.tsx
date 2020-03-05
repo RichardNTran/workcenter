@@ -30,8 +30,8 @@ const IntroducePage:FunctionComponent<IIntroducePageProps> = () => {
 
   function renderIntroduceSlide() {
     return INTRODUCE_SLIDE.map((homeSlide, homeSlideIndex) => (
-      <div>
-        <Style.IntroduceSlideItem key={`home-slide-${homeSlideIndex}`}>
+      <div key={`home-slide-${homeSlideIndex}`}>
+        <Style.IntroduceSlideItem>
           <Text className="mt-2 mb-2" xl white w3>{homeSlide.content}</Text>
           <Text xxl white w6>{homeSlide.author}</Text>
         </Style.IntroduceSlideItem>
@@ -84,8 +84,8 @@ const IntroducePage:FunctionComponent<IIntroducePageProps> = () => {
               Lorem ipsum dolor sit amet consectetur, adipisicing elit.
             </Text>
             <div className="d-flex">
-              <button className="mr-2 btn btn-lg btn-info">Schedule a Call</button>
-              <button className="ml-2 btn btn-lg btn-outline-info">Apply as Freelancer</button>
+              <button className="mr-2 btn btn-lg btn-primary">Schedule a Call</button>
+              <button className="ml-2 btn btn-lg btn-outline-light">Apply as Freelancer</button>
             </div>
           </Style.IntroducePanelContent>
         </Style.IntroducePanelOverview>

@@ -19,8 +19,8 @@ const Routes = () => {
   return (
     <Router history={history}>
       <Switch>
-        <DefaultLayout exact path={RegisterPath} component={AsyncRegister} />
-        <DefaultLayout exact path={IntroducePath} component={AsyncIntroduce}/>
+        <DefaultLayout exact path={RegisterPath} component={AsyncRegister} isIntroduceHeader />
+        <DefaultLayout exact path={IntroducePath} component={AsyncIntroduce} isIntroduceHeader />
         <DefaultLayout exact path={HomePath} component={AsyncHome} />
         <DefaultLayout exact path={ProfilePath} component={AsyncProfile} />
       </Switch>

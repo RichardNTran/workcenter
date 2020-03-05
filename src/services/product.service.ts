@@ -1,6 +1,5 @@
 import RestClient from './rest-client';
 import axios from 'axios';
-import { findIndex } from 'lodash/array';
 
 const urlAPI = 'http://localhost:3001';
 

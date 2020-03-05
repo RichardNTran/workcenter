@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 
 import Header from '../Header';
@@ -11,7 +11,7 @@ const DefaultLayout = ({ component: Component, ...rest }) => {
       {...rest}
       render={matchProps => (
         <Style.DefaultLayoutContainer>
-          <Header />
+          <Header isIntroduceHeader={rest.isIntroduceHeader} />
           <Style.MainContainer>
             <Component {...matchProps} />
           </Style.MainContainer>
