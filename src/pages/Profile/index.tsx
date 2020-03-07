@@ -1,5 +1,6 @@
 import React from 'react';
 import { withFormik, Field, FormikProps } from 'formik';
+import { DatePicker } from 'antd';
 
 import { InputField, SelectField } from '../../components/Fields';
 import { Text } from '../../components/styles';
@@ -284,6 +285,7 @@ const ProfileForm = (props: IProfilePageProps & FormikProps<ProfileFormValue>) =
                   component={InputField}
                 />
               </div>
+              
               <div className="d-flex justify-content-end">
                 <button
                   type="submit"
@@ -296,7 +298,7 @@ const ProfileForm = (props: IProfilePageProps & FormikProps<ProfileFormValue>) =
           </div>
         </div>
         <div className="col-md-4 bg-light">
-
+          {/* <DatePicker/> */}
         </div>
       </div>
     </div>

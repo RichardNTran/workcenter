@@ -4,6 +4,7 @@ import theme from './constants/theme';
 import GlobalStyle from './GlobalStyles';
 import AppRoutes from "./routers";
 
+import 'antd/dist/antd.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export interface IAppProps extends StateProps, DispatchProps {}
