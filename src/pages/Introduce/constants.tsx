@@ -1,16 +1,22 @@
+import developerIcon from 'src/assets/images/introduce/developer-icon.png';
+import designerIcon from 'src/assets/images/introduce/designer-icon.png';
+import financeIcon from 'src/assets/images/introduce/finance-icon.png';
+import projectManagerIcon from 'src/assets/images/introduce/project-manager-icon.png';
+import productManagerIcon from 'src/assets/images/introduce/product-manager-icon.png';
+
 export const INTRODUCE_OVERVIEW = [
   {
-    image: 'https://via.placeholder.com/200',
+    image: 'https://bs-uploads.toptal.io/blackfish-uploads/enterprise_page/content/solutions_section/item/icon_file/icon/2026/download-e8d77b177bfa6b28450b2b6ce56892d3.svg',
     title: 'Individuals',
     content: 'Fill a missing skill set or role on your team.',
   },
   {
-    image: 'https://via.placeholder.com/200',
+    image: 'https://bs-uploads.toptal.io/blackfish-uploads/enterprise_page/content/solutions_section/item/icon_file/icon/2027/download-2-ca238e6a2dca8b17d2a9c5dfe0d98074.svg',
     title: 'Teams',
     content: 'Assemble a full team, ready to follow your lead.',
   },
   {
-    image: 'https://via.placeholder.com/200',
+    image: 'https://bs-uploads.toptal.io/blackfish-uploads/enterprise_page/content/solutions_section/item/icon_file/icon/2028/download-1-33fb68f25dd9c6e0dfcbe0adf4980075.svg',
     title: 'Projects',
     content: 'Leverage a fully-managed team, operating using agile best practices.',
   }
@@ -63,7 +69,7 @@ export const INTRODUCE_BUILDING_TEAMS = [
 
 export const TALENT_DATA = [
   {
-    icon: 'https://via.placeholder.com/30',
+    icon: developerIcon,
     title: 'Developers',
     talent: [
       {
@@ -87,7 +93,7 @@ export const TALENT_DATA = [
     ],
   },
   {
-    icon: 'https://via.placeholder.com/30',
+    icon: designerIcon,
     title: 'Designers',
     talent: [
       {
@@ -111,7 +117,7 @@ export const TALENT_DATA = [
     ],
   },
   {
-    icon: 'https://via.placeholder.com/30',
+    icon: financeIcon,
     title: 'Finance',
     talent: [
       {
@@ -135,7 +141,7 @@ export const TALENT_DATA = [
     ],
   },
   {
-    icon: 'https://via.placeholder.com/30',
+    icon: projectManagerIcon,
     title: 'Project Managers',
     talent: [
       {
@@ -159,7 +165,7 @@ export const TALENT_DATA = [
     ],
   },
   {
-    icon: 'https://via.placeholder.com/30',
+    icon: productManagerIcon,
     title: 'Product Managers',
     talent: [
       {

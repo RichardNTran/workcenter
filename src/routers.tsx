@@ -13,7 +13,7 @@ import {
   HomePath,
   ProfilePath,
 } from './constants/routerConstants';
-import history from './util/history';
+import history from './config/history';
 
 const Routes = () => {
   return (

@@ -22,4 +22,7 @@ export default Yup.object().shape({
   name: Yup.string()
     .required('Name is required')
     .max(50, 'Name incorrect format'),
+  policy: Yup.bool()
+    .required('Policy is required')
+    .oneOf([true], 'Policy is required'),
 });

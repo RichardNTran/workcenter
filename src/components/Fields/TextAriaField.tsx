@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { Form, Input, Typography  } from 'antd';
+import { Form, Input } from 'antd';
 
-interface IInputFieldProps {
+interface ITextAriaFieldProps {
   field: any,
   form: {
     submitCount: Number,
@@ -13,7 +13,7 @@ interface IInputFieldProps {
   style: Object,
 }
 
-const InputField: FunctionComponent<IInputFieldProps> = ({
+const TextAriaField: FunctionComponent<ITextAriaFieldProps> = ({
   field,
   form: {
     submitCount, errors
@@ -26,29 +26,18 @@ const InputField: FunctionComponent<IInputFieldProps> = ({
 }) => {
   const showError = !!errors[field.name] && submitCount !== 0;
   const validateStatus = showError ? 'error' : 'validating';
-  function renderRequireLabel() {
-    return (
-      <>
-        <Typography.Text type="danger">*</Typography.Text>&nbsp;
-        {label}
-      </>
-    )
-  }
   return (
     <Form.Item
-      label={isRequire && label ? renderRequireLabel() : label}
+      label={label}
       name={field.name}
       hasFeedback={showError}
       validateStatus={validateStatus}
       help={showError && errors[field.name]}
       style={style}
     >
-      {props.type === 'password'
-        ? <Input.Password size="large" {...props} {...field} />
-        : <Input {...props} {...field} />
-      }
+      <Input.TextArea {...props} {...field} />
     </Form.Item>
   );
 };
 
-export { InputField };
+export { TextAriaField };

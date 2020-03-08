@@ -1,9 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import Slider from "react-slick";
+import { Button } from 'antd';
 
-import { Text } from '../../components/styles';
+import history from 'src/config/history';
+
+import CustomArrowSlick from 'src/components/CustomArrowSlick';
+import { Text } from 'src/components/styles';
 import TopTalent from './view/TopTalent';
 
+import { RegisterPath } from 'src/constants/routerConstants';
 import {
   INTRODUCE_OVERVIEW,
   INTRODUCE_SLIDE,
@@ -13,27 +18,30 @@ import {
 
 import * as Style from './styles';
 
-interface IIntroducePageProps {}
+interface IIntroducePageProps { }
 
-const IntroducePage:FunctionComponent<IIntroducePageProps> = () => {
+const IntroducePage: FunctionComponent<IIntroducePageProps> = () => {
   function renderIntroduceOverview() {
-    return INTRODUCE_OVERVIEW.map((homeIntroduce, homeIntroduceIndex) => (
-      <div className="col-md-4" key={`home-introduce-${homeIntroduceIndex}`}>
+    return INTRODUCE_OVERVIEW.map((introduceOverview, introduceOverviewIndex) => (
+      <div className="col-md-4" key={`introduce-overview-${introduceOverviewIndex}`}>
         <div className="d-flex flex-column justify-content-center align-items-center">
-          <img src={homeIntroduce.image} alt=""/>
-          <Text className="mt-2 mb-2" xl w6>{homeIntroduce.title}</Text>
-          <Text center>{homeIntroduce.content}</Text>
+          <Style.IntroduceOverviewImage>
+            <img src={introduceOverview.image} alt="" />
+          </Style.IntroduceOverviewImage>
+          <Text className="mt-2 mb-2" xl w6>{introduceOverview.title}</Text>
+          <Text center>{introduceOverview.content}</Text>
         </div>
       </div>
     ))
   }
 
   function renderIntroduceSlide() {
-    return INTRODUCE_SLIDE.map((homeSlide, homeSlideIndex) => (
-      <div key={`home-slide-${homeSlideIndex}`}>
+    return INTRODUCE_SLIDE.map((introduceSlide, introduceSlideIndex) => (
+      <div key={`introduce-slide-${introduceSlideIndex}`}>
         <Style.IntroduceSlideItem>
-          <Text className="mt-2 mb-2" xl white w3>{homeSlide.content}</Text>
-          <Text xxl white w6>{homeSlide.author}</Text>
+          <Text fontSize="96px" white w3>“</Text>
+          <Text className="mt-2 mb-4" xl white w3>{introduceSlide.content}</Text>
+          <Text xxl white w6>{introduceSlide.author}</Text>
         </Style.IntroduceSlideItem>
       </div>
     ))
@@ -44,7 +52,7 @@ const IntroducePage:FunctionComponent<IIntroducePageProps> = () => {
       <div className="col-md-4" key={`work-step-${workStepIndex}`}>
         <div className="d-flex flex-column justify-content-center align-items-center">
           <Style.WorkStepIndex>
-            <Text xxl subText>{workStepIndex + 1}</Text>
+            <Text xxl subText w3>{workStepIndex + 1}</Text>
           </Style.WorkStepIndex>
           <Text className="mt-4 mb-2" xl w6>{workStep.title}</Text>
           <Text center>{workStep.content}</Text>
@@ -57,7 +65,7 @@ const IntroducePage:FunctionComponent<IIntroducePageProps> = () => {
     return INTRODUCE_BUILDING_TEAMS.map((buildingItem, buildingIndex) => (
       <div className="col-md-4" key={`building-item-${buildingIndex}`}>
         <div className="d-flex flex-column justify-content-center align-items-center">
-          <img src={buildingItem.image} alt=""/>
+          <img src={buildingItem.image} alt="" />
           <Text className="mt-4" center>{buildingItem.content}</Text>
         </div>
       </div>
@@ -69,7 +77,9 @@ const IntroducePage:FunctionComponent<IIntroducePageProps> = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
+    slidesToScroll: 1,
+    nextArrow: <CustomArrowSlick type="NEXT" onClick={(e) => e} />,
+    prevArrow: <CustomArrowSlick type="PREV" onClick={(e) => e} />,
   };
 
   return (
@@ -77,25 +87,39 @@ const IntroducePage:FunctionComponent<IIntroducePageProps> = () => {
       <Style.IntroducePanel>
         <Style.IntroducePanelOverview>
           <Style.IntroducePanelContent>
-            <Text fontSize="48px" white w3>
+            <Text fontSize="48px" lineHeight="56px" white w3>
               The World's Top Talent, On Demand
             </Text>
-            <Text className="mt-4 mb-4" xl white w3>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            <Text className="mt-4 mb-4" width="600px" xl white w3 center>
+              Wellcome to your elite talent network. Build high-performing teams with the talent you need, exactly when you need it.
             </Text>
-            <div className="d-flex">
-              <button className="mr-2 btn btn-lg btn-primary">Schedule a Call</button>
-              <button className="ml-2 btn btn-lg btn-outline-light">Apply as Freelancer</button>
+            <div className="d-flex mt-4">
+              <Button
+                className="mr-2"
+                type="primary"
+                size="large"
+                onClick={() => history.push(RegisterPath)}
+              >
+                Schedule a Call
+              </Button>
+              <Button 
+                className="ml-2"
+                ghost
+                size="large"
+                onClick={() => history.push(RegisterPath)}
+              >
+                Apply as Freelancer
+              </Button>
             </div>
           </Style.IntroducePanelContent>
         </Style.IntroducePanelOverview>
       </Style.IntroducePanel>
       <Style.IntroduceOverview height="500px">
         <Style.IntroduceOverviewContent>
-          <Text fontSize="42px" headerText w3>
+          <Text h1 headerText w3>
             High-Performance Teams, On Your Terms
           </Text>
-          <Text className="mt-4 mb-4">Work with hand-selected talent, customized to fit your needs at scale.</Text>
+          <Text className="mt-4 mb-4" lg>Work with hand-selected talent, customized to fit your needs at scale.</Text>
           <div className="row">
             {renderIntroduceOverview()}
           </div>
@@ -110,7 +134,7 @@ const IntroducePage:FunctionComponent<IIntroducePageProps> = () => {
       </Style.IntroduceSlide>
       <Style.IntroduceOverview height="500px">
         <Style.IntroduceOverviewContent>
-          <Text className="mb-4" fontSize="42px" headerText w3>
+          <Text className="mb-4" h1 headerText w3>
             How Toptal Work
           </Text>
           <div className="row mt-4">
@@ -121,7 +145,7 @@ const IntroducePage:FunctionComponent<IIntroducePageProps> = () => {
       <TopTalent />
       <Style.IntroduceOverview height="500px">
         <Style.IntroduceOverviewContent>
-          <Text className="mb-4" fontSize="42px" headerText w3>
+          <Text className="mb-4" h1 headerText w3>
             Building Amazing Teams with On-Demand Telent
           </Text>
           <div className="row mt-4">

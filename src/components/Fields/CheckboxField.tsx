@@ -1,24 +1,29 @@
 import React, { FunctionComponent } from 'react';
-import { Form, Input, Typography  } from 'antd';
+import { Form, Checkbox } from 'antd';
 
-interface IInputFieldProps {
+interface ICheckboxFieldProps {
   field: any,
   form: {
+    setFieldValue: Function;
     submitCount: Number,
     errors: String,
   },
   type: String,
   label: String,
+  value: String,
   isRequire: Boolean,
   style: Object,
 }
 
-const InputField: FunctionComponent<IInputFieldProps> = ({
+const CheckboxField: FunctionComponent<ICheckboxFieldProps> = ({
   field,
   form: {
-    submitCount, errors
+    setFieldValue,
+    submitCount,
+    errors,
   },
   label,
+  value,
   isRequire,
   children,
   style,
@@ -26,29 +31,24 @@ const InputField: FunctionComponent<IInputFieldProps> = ({
 }) => {
   const showError = !!errors[field.name] && submitCount !== 0;
   const validateStatus = showError ? 'error' : 'validating';
-  function renderRequireLabel() {
-    return (
-      <>
-        <Typography.Text type="danger">*</Typography.Text>&nbsp;
-        {label}
-      </>
-    )
-  }
   return (
     <Form.Item
-      label={isRequire && label ? renderRequireLabel() : label}
       name={field.name}
-      hasFeedback={showError}
       validateStatus={validateStatus}
       help={showError && errors[field.name]}
+      valuePropName="checked"
       style={style}
     >
-      {props.type === 'password'
-        ? <Input.Password size="large" {...props} {...field} />
-        : <Input {...props} {...field} />
-      }
+      <Checkbox
+        {...props}
+        {...field}
+        value={value}
+        onChange={(e) => setFieldValue(field.name, e.target.checked)}
+      >
+        {label}
+      </Checkbox>
     </Form.Item>
   );
 };
 
-export { InputField };
+export { CheckboxField };

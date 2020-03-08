@@ -1,22 +1,26 @@
 import React, { FunctionComponent } from 'react';
-import { Form, Input, Typography  } from 'antd';
+import { Form, InputNumber } from 'antd';
 
-interface IInputFieldProps {
+interface INumberFieldProps {
   field: any,
   form: {
+    setFieldValue: Function,
     submitCount: Number,
     errors: String,
   },
   type: String,
   label: String,
   isRequire: Boolean,
+  width: String,
   style: Object,
 }
 
-const InputField: FunctionComponent<IInputFieldProps> = ({
+const NumberField: FunctionComponent<INumberFieldProps> = ({
   field,
   form: {
-    submitCount, errors
+    setFieldValue,
+    submitCount,
+    errors,
   },
   label,
   isRequire,
@@ -26,29 +30,24 @@ const InputField: FunctionComponent<IInputFieldProps> = ({
 }) => {
   const showError = !!errors[field.name] && submitCount !== 0;
   const validateStatus = showError ? 'error' : 'validating';
-  function renderRequireLabel() {
-    return (
-      <>
-        <Typography.Text type="danger">*</Typography.Text>&nbsp;
-        {label}
-      </>
-    )
-  }
   return (
     <Form.Item
-      label={isRequire && label ? renderRequireLabel() : label}
+      label={label}
       name={field.name}
       hasFeedback={showError}
       validateStatus={validateStatus}
       help={showError && errors[field.name]}
       style={style}
     >
-      {props.type === 'password'
-        ? <Input.Password size="large" {...props} {...field} />
-        : <Input {...props} {...field} />
-      }
+      <InputNumber
+        {...props}
+        {...field}
+        min={0}
+        onChange={(value) => setFieldValue(field.name, value)}
+        style={props.width ? { width: props.width } : { width: '100%' }}
+      />
     </Form.Item>
   );
 };
 
-export { InputField };
+export { NumberField };

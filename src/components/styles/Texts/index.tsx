@@ -102,6 +102,21 @@ export const Text = styled.p`
       font-size: ${props.theme.fontSize.xxxl};
       line-height: ${props.theme.lineHeight.xxxl};
     `}
+  ${(props) => props.h3
+    && css`
+      font-size: ${props.theme.fontSize.h3};
+      line-height: ${props.theme.lineHeight.h3};
+    `}
+  ${(props) => props.h2
+    && css`
+      font-size: ${props.theme.fontSize.h2};
+      line-height: ${props.theme.lineHeight.h2};
+    `}
+  ${(props) => props.h1
+    && css`
+      font-size: ${props.theme.fontSize.h1};
+      line-height: ${props.theme.lineHeight.h1};
+    `}
 
   /*color*/
   ${(props) => props.primaryColor
