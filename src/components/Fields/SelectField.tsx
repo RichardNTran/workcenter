@@ -1,88 +1,68 @@
 import React, { FunctionComponent } from 'react';
 
-import { Text } from '../styles';
-import { FormError } from './FormError';
+import { Form, Select, Typography } from 'antd';
 
 interface ISelectFieldProps {
   field: any,
   form: {
+    setFieldValue: Function;
     submitCount: Number,
     errors: String,
   },
   label: String,
   options: Array<any>,
-  placeholder: String,
   isRequire: Boolean,
-  isInLine: Boolean,
+  width: String,
+  style: Object,
 }
 
 const SelectField: FunctionComponent<ISelectFieldProps> = ({
   field,
   form: {
-    submitCount, errors
+    setFieldValue,
+    submitCount,
+    errors,
   },
   label,
   options,
-  placeholder,
   isRequire,
-  isInLine,
+  style,
   ...props
 }) => {
-  function renderLabelAndInput() {
-    if (isInLine) {
-      return (
-        <div className="row">
-          {label && (
-            <div className="d-flex align-items-center col-sm-4">
-              <Text className="col-form-label">{label}</Text>
-              {isRequire && <Text className="ml-1" error w6>*</Text>}
-            </div>
-          )}
-          <div className="d-flex align-items-center col-sm-8">
-            <select
-              className="form-control bg-light"
-              {...props}
-              {...field}
-            >
-              <option value="" selected disabled hidden>{placeholder}</option>
-              {options.map((item, itemIndex) => (
-                <option key={itemIndex} value={item.id}>
-                  {item.title}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      );
-    }
+  const showError = !!errors[field.name] && submitCount !== 0;
+  const validateStatus = showError ? 'error' : 'validating';
+
+  function renderRequireLabel() {
     return (
       <>
-        {label && (
-          <div className="d-flex">
-            <Text>{label}</Text>
-            {isRequire && <Text className="ml-1" error w6>*</Text>}
-          </div>
-        )}
-        <select
-          className="form-control bg-light"
-          {...props}
-          {...field}
-        >
-          <option value="" selected disabled hidden>{placeholder}</option>
-          {options.map((item, itemIndex) => (
-            <option key={itemIndex} value={item.id}>
-              {item.title}
-            </option>
-          ))}
-        </select>
+        <Typography.Text type="danger">*</Typography.Text>&nbsp;
+        {label}
       </>
-    );
+    )
   }
+
   return (
-    <div className="form-group">
-      {renderLabelAndInput()}
-      <FormError value={errors[field.name]} submitCount={submitCount} />
-    </div>
+    <Form.Item
+      label={isRequire && label ? renderRequireLabel() : label}
+      name={field.name}
+      hasFeedback={showError}
+      validateStatus={validateStatus}
+      help={showError && errors[field.name]}
+      style={style}
+    >
+      <Select
+        {...props}
+        {...field}
+        onChange={(value) => setFieldValue(field.name, value)}
+        style={props.width ? { width: props.width } : { width: '100%' }}
+      >
+        {options.map((item, itemIndex) => (
+          <Select.Option key={itemIndex} value={item.id}>
+            {item.title}
+          </Select.Option>
+        ))}
+      </Select>
+    </Form.Item>
   );
 };
 

@@ -1,11 +1,21 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Button, Dropdown, Menu } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
-import history from '../../../util/history';
+import history from 'src/config/history';
 
 import { Text } from '../../styles';
 
 import { HEADER_ITEMS } from './constants';
-import { IntroducePath } from '../../../constants/routerConstants';
+import {
+  IntroducePath,
+  HomePath,
+  RegisterPath,
+  ProfilePath,
+} from 'src/constants/routerConstants';
+
+import dropdownIcon from 'src/assets/images/header/dropdown-icon.png';
 
 import * as Style from './styles';
 
@@ -13,7 +23,7 @@ interface IHeaderProps {
   isIntroduceHeader: Boolean,
 }
 
-const Header:FunctionComponent<IHeaderProps> = ({
+const Header: FunctionComponent<IHeaderProps> = ({
   isIntroduceHeader
 }) => {
   const [isTopHeader, setIsTopHeader] = useState<Boolean>(true);
@@ -31,10 +41,25 @@ const Header:FunctionComponent<IHeaderProps> = ({
 
   function renderHeaderItem() {
     return HEADER_ITEMS.map((headerItem, headerItemIndex) => (
-      <Text className="ml-4" lg white key={`header-item-${headerItemIndex}`}>
+      <Button className="ml-3" type="link" ghost size="large" key={`header-item-${headerItemIndex}`}>
         {headerItem.title}
-      </Text>
+      </Button>
     ))
+  }
+
+  function renderDropdowMenu() {
+    return (
+      <Menu>
+        <Menu.Item>
+          <Link to={ProfilePath} >
+            Edit Profile
+          </Link>
+        </Menu.Item>
+        <Menu.Item>
+          Logout
+        </Menu.Item>
+      </Menu>
+    )
   }
 
   return (
@@ -42,24 +67,32 @@ const Header:FunctionComponent<IHeaderProps> = ({
       isTopHeader={isTopHeader && history.location.pathname === IntroducePath}
     >
       <Style.HeaderContent fullWidth={!isIntroduceHeader}>
+        <Text xxxl white onClick={() => history.push(HomePath)}>Logo Web</Text>
         {isIntroduceHeader
           ? (
             <>
-              <Text xxxl white>Logo Web</Text>
               <div className="d-flex align-items-center">
                 {renderHeaderItem()}
-                <div className="ml-4 p-2 border rounded">
-                  <Text lg white>Schedule a Call</Text>
-                </div>
+                <Button className="ml-4" ghost size="large" onClick={() => history.push(RegisterPath)}>
+                  Schedule a Call
+                </Button>
               </div>
             </>
           )
           : (
             <>
-              <Text className="ml-4" xxxl white>Logo Web</Text>
               <div className="d-flex">
-                <Style.UserName />
-                <Style.UserAvatar />
+                <Style.UserName>
+                  <Text lg white w3>User Name</Text>
+                  <Dropdown overlay={renderDropdowMenu} placement="bottomRight">
+                    <Button type="link" size="small">
+                      <img src={dropdownIcon} width="16px" height="16px" alt="" />
+                    </Button>
+                  </Dropdown>
+                </Style.UserName>
+                <Style.UserAvatar>
+                  <UserOutlined style={{ fontSize: '20px', color: '#fff' }} />
+                </Style.UserAvatar>
               </div>
             </>
           )

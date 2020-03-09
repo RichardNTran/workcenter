@@ -12,11 +12,14 @@ const TopTalent:FunctionComponent<ITopTalentProps> = () => {
   const [talentTypeActived, setTalentTypeActived] = useState(0);
   function renderTalentTypes() {
     return TALENT_DATA.map((talentType, talentTypeIndex) => (
-      <Style.TalentTypeContent key={`talent-type-${talentTypeIndex}`}>
+      <Style.TalentTypeContent
+        key={`talent-type-${talentTypeIndex}`}
+        actived={talentTypeIndex === talentTypeActived}
+      >
         <Style.TalentTypeIcon onClick={() => setTalentTypeActived(talentTypeIndex)}>
-          <img src={talentType.icon} alt=""/>
+          <img src={talentType.icon} height="28px" width="28px" alt=""/>
         </Style.TalentTypeIcon>
-        <Text className="mt-1" sm white w3 center width="70px">{talentType.title}</Text>
+        <Text className="mt-1" xs white w3 center width="70px">{talentType.title}</Text>
       </Style.TalentTypeContent>
     ))
   }
@@ -27,8 +30,9 @@ const TopTalent:FunctionComponent<ITopTalentProps> = () => {
         <div className="card w-100 border-0 rounded-0">
           <img src={talentItem.image} className="card-img-top" alt="..." />
           <div className="card-body">
-            <h5 className="card-title">{talentItem.name}</h5>
-            <p className="card-text">{talentItem.about}</p>
+            <Text lg headerText w6>{talentItem.name}</Text>
+            <Text subText>{talentItem.jobPosition}</Text>
+            <Text className="mt-3">{talentItem.about}</Text>
           </div>
         </div>
       </div>
